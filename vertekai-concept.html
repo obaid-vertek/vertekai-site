@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VertekAI - Empowering Industries with Intelligent AI Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0A1A2F;
+            --primary-cyan: #00BFFF;
+            --primary-light: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray-medium: #E0E0E0;
+            --gray-dark: #666;
+            --gradient-primary: linear-gradient(135deg, #0A1A2F 0%, #1a2f4f 100%);
+            --gradient-accent: linear-gradient(135deg, #00BFFF 0%, #0099CC 100%);
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --shadow-hard: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-dark);
+            background: var(--primary-light);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--gray-dark);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(0, 191, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 191, 255, 0.4);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary-dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a3a5f 50%, #0A1A2F 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><g fill="none" stroke="%2300BFFF" stroke-width="0.5" opacity="0.1"><circle cx="100" cy="100" r="50"/><circle cx="300" cy="200" r="70"/><circle cx="600" cy="150" r="60"/><circle cx="900" cy="300" r="80"/><circle cx="200" cy="400" r="40"/><circle cx="500" cy="350" r="90"/><circle cx="800" cy="450" r="55"/><circle cx="1100" cy="200" r="65"/><path d="M100,100 Q300,50 600,150 T900,300"/><path d="M200,400 Q500,250 800,450"/></g></svg>') no-repeat center;
+            background-size: cover;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
+            50% { transform: translate(10%, 10%) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            margin-bottom: 1.5rem;
+            animation: slideInLeft 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.375rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            animation: slideInRight 1s ease;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero .cta-button {
+            font-size: 1.125rem;
+            padding: 1rem 2.5rem;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .card p {
+            font-size: 1rem;
+        }
+
+        /* Updated Global Reach Section */
+        .global-reach {
+            background: var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .global-reach::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .global-locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .location-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .location-flag {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .location-detail {
+            font-size: 0.875rem;
+            color: var(--gray-dark);
+        }
+
+        .global-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-dark);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Industries Grid */
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .industry-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, white 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-medium);
+        }
+
+        .industry-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-cyan);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .industry-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gray-medium);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-cyan);
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-cyan);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+
+            .global-locations {
+                grid-template-columns: 1fr;
+            }
+
+            .global-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
+        /* Value Props */
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-prop {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .value-prop-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.1) 0%, rgba(0, 191, 255, 0.2) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-accent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 2rem;
+            width: calc(50% - 40px);
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-cyan);
+            border-radius: 50%;
+            border: 4px solid white;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            left: -50px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            right: -50px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 40px;
+            }
+
+            .timeline-item::before {
+                left: -30px !important;
+            }
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">VertekAI</div>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                <li><a href="#about" onclick="showPage('about')">About</a></li>
+                <li><a href="#industries" onclick="showPage('industries')">Industries</a></li>
+                <li><a href="#solutions" onclick="showPage('solutions')">Solutions</a></li>
+                <li><a href="#why" onclick="showPage('why')">Why VertekAI</a></li>
+                <li><a href="#contact" class="cta-button" onclick="showPage('contact')">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page-section active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Empowering Industries with Intelligent AI Solutions</h1>
+                    <p class="hero-subtitle">We build industry-grade AI and digital solutions that scale horizontally and solve real-world bottlenecks.</p>
+                    <a href="#contact" class="cta-button" onclick="showPage('contact')">Let's Build Together</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Updated Global Reach Section -->
+        <section class="section global-reach">
+            <div class="container">
+                <h2 class="gradient-text" style="text-align: center;">Global Impact, Local Excellence</h2>
+                <p style="text-align: center; margin-top: 1rem; font-size: 1.25rem; color: var(--primary-dark); max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Delivering transformative AI solutions across continents with deep local expertise
+                </p>
+                
+                <div class="global-locations">
+                    <div class="location-card">
+                        <div class="location-flag">🇺🇸</div>
+                        <div class="location-name">United States</div>
+                        <div class="location-detail">Innovation Hub</div>
+                    </div>
+                    <div class="location-card">
+                        <div class="location-flag">🇨🇦</div>
+                        <div class="location-name">Canada</div>
+                        <div class="location-detail">Development Center</div>
+                    </div>
+                    <div class="location-card">
+                        <div class="location-flag">🇳🇿</div>
+                        <div class="location-name">New Zealand</div>
+                        <div class="location-detail">Pacific Operations</div>
+                    </div>
+                    <div class="location-card">
+                        <div class="location-flag">🌏</div>
+                        <div class="location-name">Southeast Asia</div>
+                        <div class="location-detail">Regional Excellence</div>
+                    </div>
+                </div>
+
+                <div class="global-stats">
+                    <div class="stat">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Continents</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Global Support</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Enterprise Clients</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Expertise -->
+        <section class="section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 1rem;">Our Expertise</h2>
+                <p style="text-align: center; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Transforming industries through intelligent technology and data-driven innovation.
+                </p>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🤖</div>
+                        <h3>AI Solutions</h3>
+                        <p>Apply AI to improve decision-making and automate processes with clinic-grade precision and enterprise scalability.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🌐</div>
+                        <h3>Digital Platforms</h3>
+                        <p>Build platforms that connect people, data, and opportunity through modern architectures and cloud-native solutions.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <h3>Marketing Intelligence</h3>
+                        <p>Leverage data-driven strategies to grow and engage audiences with predictive analytics and personalization.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#solutions" class="cta-button" onclick="showPage('solutions')">Explore Solutions</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Collaboration -->
+        <section class="section" style="background: linear-gradient(135deg, #f5f5f5 0%, white 100%);">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                    <div>
+                        <h2>Partnership-Driven Innovation</h2>
+                        <p style="margin: 1.5rem 0;">We're eager to meet and build something transformative together. Our collaborative approach ensures your vision becomes reality through cutting-edge technology.</p>
+                        <a href="#contact" class="cta-button" onclick="showPage('contact')">Get in Touch</a>
+                    </div>
+                    <div class="glass-card">
+                        <div class="value-prop-icon">🤝</div>
+                        <h3>Why Partner with Us?</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.5rem 0;">✓ Clinic-grade AI expertise</li>
+                            <li style="padding: 0.5rem 0;">✓ Cross-industry experience</li>
+                            <li style="padding: 0.5rem 0;">✓ End-to-end delivery</li>
+                            <li style="padding: 0.5rem 0;">✓ Global reach, local focus</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h1 class="gradient-text" style="text-align: center; margin-bottom: 3rem;">About VertekAI</h1>
+                
+                <!-- Mission Section -->
+                <div class="glass-card" style="max-width: 800px; margin: 0 auto 3rem;">
+                    <h2 style="text-align: center; margin-bottom: 1.5rem;">Our Mission</h2>
+                    <p style="text-align: center; font-size: 1.25rem;">
+                        VertekAI partners with clinics and process industries to integrate AI across critical workflows, driving automation, compliance, and operational excellence. We work in full collaboration with our clients as one team, and we co-own the product with them throughout design, development, and deployment, ensuring long-term alignment and shared success.
+                    </p>
+                </div>
+
+                <!-- Our Story Timeline -->
+                <h2 style="text-align: center; margin-bottom: 1rem;">Our Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Foundation</h3>
+                        <p>Started with a vision to democratize AI for businesses of all sizes, focusing on practical, scalable solutions.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Clinic-Grade AI</h3>
+                        <p>Developed industry-leading AI solutions for healthcare, achieving clinic-grade accuracy and reliability.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Global Expansion</h3>
+                        <p>Extended our reach across US, Canada, New Zealand, and Southeast Asia, serving diverse industries.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Innovation Hub</h3>
+                        <p>Established as a trusted partner for enterprises seeking AI transformation and digital innovation.</p>
+                    </div>
+                </div>
+
+                <!-- Core Values -->
+                <h2 style="text-align: center; margin: 4rem 0 2rem;">Core Values</h2>
+                <div class="value-props">
+                    <div class="value-prop">
+                        <div class="value-prop-icon">💡</div>
+                        <h3>Innovation</h3>
+                        <p>Frontier technologies for real-world impact, pushing boundaries while maintaining practicality.</p>
+                    </div>
+                    <div class="value-prop">
+                        <div class="value-prop-icon">🤝</div>
+                        <h3>Collaboration</h3>
+                        <p>Partnering closely with clients for success, treating every project as a shared journey.</p>
+                    </div>
+                    <div class="value-prop">
+                        <div class="value-prop-icon">⭐</div>
+                        <h3>Excellence</h3>
+                        <p>Clinic-grade, industry-standard solutions that exceed expectations and deliver measurable results.</p>
+                    </div>
+                    <div class="value-prop">
+                        <div class="value-prop-icon">🔒</div>
+                        <h3>Trust</h3>
+                        <p>Building secure, reliable systems with transparency and integrity at every step.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Industries Page -->
+    <div id="industries" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h1 class="gradient-text" style="text-align: center;">Adapting AI to Multiple Industries</h1>
+                <p style="text-align: center; max-width: 800px; margin: 2rem auto 3rem; font-size: 1.25rem;">
+                    We work across multiple industries — from healthcare and real estate to marketing and beyond — helping each adapt and thrive with modern technology.
+                </p>
+                
+                <div class="industries-grid">
+                    <div class="industry-card">
+                        <div class="industry-icon">🏥</div>
+                        <h3>Healthcare</h3>
+                        <p>AI diagnostics, predictive analytics, and clinic-grade solutions improving patient outcomes.</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="industry-icon">🏢</div>
+                        <h3>Real Estate</h3>
+                        <p>Data-driven decision tools, market analytics, and intelligent property management systems.</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="industry-icon">📱</div>
+                        <h3>Marketing & Media</h3>
+                        <p>AI-powered audience targeting, content optimization, and campaign performance analytics.</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="industry-icon">🏭</div>
+                        <h3>Manufacturing</h3>
+                        <p>Predictive maintenance, quality control automation, and supply chain optimization.</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="industry-icon">💰</div>
+                        <h3>Financial Services</h3>
+                        <p>Risk assessment, fraud detection, and intelligent investment analytics.</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="industry-icon">🚚</div>
+                        <h3>Logistics</h3>
+                        <p>Route optimization, demand forecasting, and real-time tracking solutions.</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#solutions" class="cta-button" onclick="showPage('solutions')">See Our Solutions</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Solutions Page -->
+    <div id="solutions" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h1 class="gradient-text" style="text-align: center;">How VertekAI Helps Businesses Thrive</h1>
+                <p style="text-align: center; max-width: 700px; margin: 2rem auto 3rem; font-size: 1.25rem;">
+                    Comprehensive solutions designed to transform your business through intelligent automation and data-driven insights.
+                </p>
+
+                <div class="cards-grid">
+                    <div class="card" style="grid-column: span 1;">
+                        <div class="card-icon">🧠</div>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Apply AI and automation to solve real-world problems — from improving decision-making to streamlining everyday tasks.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                            <li style="padding: 0.3rem 0;">• Predictive analytics</li>
+                            <li style="padding: 0.3rem 0;">• Natural language processing</li>
+                            <li style="padding: 0.3rem 0;">• Computer vision systems</li>
+                            <li style="padding: 0.3rem 0;">• Recommendation engines</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="grid-column: span 1;">
+                        <div class="card-icon">💻</div>
+                        <h3>Digital & Web Platforms</h3>
+                        <p>Design and build digital platforms connecting people, data, and opportunity with modern cloud architectures.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                            <li style="padding: 0.3rem 0;">• Scalable web applications</li>
+                            <li style="padding: 0.3rem 0;">• API development & integration</li>
+                            <li style="padding: 0.3rem 0;">• Cloud migration strategies</li>
+                            <li style="padding: 0.3rem 0;">• Microservices architecture</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="grid-column: span 1;">
+                        <div class="card-icon">📈</div>
+                        <h3>Marketing Intelligence</h3>
+                        <p>Data-driven strategies to help brands stand out and grow through smarter digital campaigns and customer insights.</p>
+                        <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                            <li style="padding: 0.3rem 0;">• Customer segmentation</li>
+                            <li style="padding: 0.3rem 0;">• Campaign optimization</li>
+                            <li style="padding: 0.3rem 0;">• Attribution modeling</li>
+                            <li style="padding: 0.3rem 0;">• Personalization engines</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Implementation Process -->
+                <h2 style="text-align: center; margin: 4rem 0 2rem;">Our Implementation Process</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Discovery & Analysis</h3>
+                        <p>Deep dive into your business challenges, data landscape, and strategic objectives.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Solution Design</h3>
+                        <p>Architect custom solutions leveraging best-in-class technologies and methodologies.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Development & Testing</h3>
+                        <p>Build robust, scalable systems with rigorous testing and quality assurance.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Deployment & Scale</h3>
+                        <p>Seamless deployment with continuous monitoring, optimization, and support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Why VertekAI Page -->
+    <div id="why" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h1 class="gradient-text" style="text-align: center;">Why Partner with VertekAI?</h1>
+                <p style="text-align: center; max-width: 700px; margin: 2rem auto 3rem; font-size: 1.25rem;">
+                    We combine technical excellence with business acumen to deliver solutions that drive real impact.
+                </p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🌐</div>
+                        <h3>Cross-Industry Experience</h3>
+                        <p>We bridge insights across sectors to design smarter systems, leveraging learnings from healthcare to finance, manufacturing to marketing.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🚀</div>
+                        <h3>End-to-End Delivery</h3>
+                        <p>From concept to deployment — and beyond. We handle every aspect of your AI journey with expertise and care.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <h3>Data-Driven Strategy</h3>
+                        <p>All recommendations backed by analytics and measurable results. We believe in evidence-based decision making.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Client-Centric Partnerships</h3>
+                        <p>We succeed when you do. Your goals become our mission, your challenges our focus.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Rapid Innovation</h3>
+                        <p>Agile methodologies and iterative development ensure quick wins while building towards long-term transformation.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔐</div>
+                        <h3>Enterprise Security</h3>
+                        <p>Bank-grade security, compliance adherence, and privacy-first design in every solution we build.</p>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div style="background: linear-gradient(135deg, #f5f5f5 0%, white 100%); border-radius: 20px; padding: 3rem; margin-top: 4rem;">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Our Impact</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+                        <div>
+                            <h3 class="gradient-text" style="font-size: 3rem; margin-bottom: 0.5rem;">4</h3>
+                            <p>Continents Served</p>
+                        </div>
+                        <div>
+                            <h3 class="gradient-text" style="font-size: 3rem; margin-bottom: 0.5rem;">95%</h3>
+                            <p>Client Satisfaction</p>
+                        </div>
+                        <div>
+                            <h3 class="gradient-text" style="font-size: 3rem; margin-bottom: 0.5rem;">50+</h3>
+                            <p>AI Models Deployed</p>
+                        </div>
+                        <div>
+                            <h3 class="gradient-text" style="font-size: 3rem; margin-bottom: 0.5rem;">24/7</h3>
+                            <p>Support & Monitoring</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h1 class="gradient-text" style="text-align: center;">Let's Build Something Amazing</h1>
+                <p style="text-align: center; max-width: 600px; margin: 2rem auto 3rem; font-size: 1.25rem;">
+                    We're excited to collaborate and build AI solutions that matter. Reach out to start the conversation.
+                </p>
+
+                <div class="contact-form">
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Tell us about your project or challenge..."></textarea>
+                        </div>
+                        <button type="submit" class="cta-button" style="width: 100%; border: none; cursor: pointer; font-size: 1.125rem;">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <p style="font-size: 1.125rem;">Prefer email?</p>
+                    <a href="mailto:contact@vertekai.com" class="gradient-text" style="font-size: 1.5rem; font-weight: 600; text-decoration: none;">
+                        contact@vertekai.com
+                    </a>
+                </div>
+
+                <!-- Office Locations -->
+                <div style="margin-top: 4rem;">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Our Global Presence</h2>
+                    <div class="cards-grid">
+                        <div class="glass-card" style="text-align: center;">
+                            <h3>North America</h3>
+                            <p>United States & Canada</p>
+                        </div>
+                        <div class="glass-card" style="text-align: center;">
+                            <h3>Asia Pacific</h3>
+                            <p>Southeast Asia & New Zealand</p>
+                        </div>
+                        <div class="glass-card" style="text-align: center;">
+                            <h3>24/7 Support</h3>
+                            <p>Global coverage across time zones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#about" onclick="showPage('about')">About Us</a>
+                <a href="#industries" onclick="showPage('industries')">Industries</a>
+                <a href="#solutions" onclick="showPage('solutions')">Solutions</a>
+                <a href="#why" onclick="showPage('why')">Why VertekAI</a>
+            </div>
+            <div class="footer-section">
+                <h4>Solutions</h4>
+                <a href="#solutions" onclick="showPage('solutions')">AI & Machine Learning</a>
+                <a href="#solutions" onclick="showPage('solutions')">Digital Platforms</a>
+                <a href="#solutions" onclick="showPage('solutions')">Marketing Intelligence</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="#contact" onclick="showPage('contact')">Contact Us</a>
+                <a href="mailto:contact@vertekai.com">contact@vertekai.com</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+            </div>
+            <div class="footer-section">
+                <h4>VertekAI</h4>
+                <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1rem;">
+                    Empowering industries with intelligent AI solutions that scale and deliver real impact.
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 VertekAI. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would normally send the data to your backend
+            console.log('Form submitted:', data);
+            
+            // Show success message
+            alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => observer.observe(section));
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
